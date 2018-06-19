@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "utf-8" />
+        <meta name = "viewport" content = "width = device-width, initial-scale = 1,
+        maximum-scale = 1, user-scalable = no" />
+        <title>Joguito</title>
+        <script type = "text/javascript" src = "js/phaser-min.js"></script>
+        <style>
+            body{
+                padding: 0px;
+                margin: 0px;
+                background: black;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- inclui o principal arquivo de jogo -->
+        <script src = "js/main.js"></script>
+
+        <input type="text" id="comandos" placeholder="Digite um comando">
+
+        <button onclick="compilar()">Realizar ação</button>
+
+        <script>
+            function compilar() {
+                var x = document.getElementById("comandos").value;
+                // aqui é a parte que pega o valor de X e passa para o jison
+            }
+        </script>
+
+    </body>
+</html>
