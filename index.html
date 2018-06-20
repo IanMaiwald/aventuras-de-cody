@@ -1,54 +1,64 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset = "utf-8" />
-        <meta name = "viewport" content = "width = device-width, initial-scale = 1,
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width = device-width, initial-scale = 1,
         maximum-scale = 1, user-scalable = no" />
-        <title>Compiland</title>
-        <script type = "text/javascript" src = "js/phaser-min.js"></script>
-        
-        <!-- Gramática oficial, "traco.js" é provisório -->
-        <!-- <script type = "text/javascript" src = "js/gramatica.js"></script> -->
+  <title>Compiland</title>
+  <script type="text/javascript" src="js/phaser-min.js"></script>
 
-        <script type = "text/javascript" src = "traco.js"></script>
-        
+  <!-- Gramática oficial, "traco.js" é provisório -->
+  <!-- <script type = "text/javascript" src = "js/gramatica.js"></script> -->
 
-        <style>
-            body{
-                padding: 0px;
-                margin: 0px;
-                background: black;
-            }
-        </style>
-    </head>
+  <script type="text/javascript" src="traco.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
 
-    <body>
-        <!-- inclui o principal arquivo de jogo -->
-        
-        <script type = "text/javascript" src = "js/main.js"></script>
+  <style>
+    body {
+      padding: 0px;
+      margin: 0px;
+      background: black;
+    }
+  </style>
+</head>
 
-        <input type="text" id="comandos" placeholder="Digite um comando"> <!-- por algum motivo não digita os espaços -->
+<body>
+  <!-- inclui o principal arquivo de jogo -->
 
-        <button onclick="compilar()">Realizar ação</button>
-        
-        <script>
-            //Pega o contéudo do input e mando pro interpretador
-            //O interpretador análise e devolve se estiver tudo bem
-            //Manda para o phaser que executa o comando
-            //Sucesso 
-            function compilar() {
-                var entrada = document.getElementById("comandos").value;
-                try{
-                    var resultado = traco.parse(entrada);
-                    var parametros = resultado.sentenca.params;
-                   
-                    comandos(parametros);
-                }
-                catch (e){
-                    console.log(String(e));
-                }
-            }
-        </script>
+  <script type="text/javascript" src="js/main.js"></script>
 
-    </body>
+  <input type="text" id="comandos" placeholder="Digite um comando">
+  <!-- por algum motivo não digita os espaços -->
+
+  <button onclick="compilar()">Realizar ação</button>
+
+  <script>
+
+    $("#comandos").on('keydown', function (e) {
+      if (e.keyCode == 13) {
+        compilar()
+      }
+    });
+    //Pega o contéudo do input e mando pro interpretador
+    //O interpretador análise e devolve se estiver tudo bem
+    //Manda para o phaser que executa o comando
+    //Sucesso 
+    function compilar() {
+      var entrada = document.getElementById("comandos").value;
+      try {
+        var resultado = traco.parse(entrada);
+        var parametros = resultado.sentenca.params;
+
+        comandos(parametros);
+      }
+      catch (e) {
+        console.log(String(e));
+      }
+    }
+  </script>
+
+</body>
+
 </html>
