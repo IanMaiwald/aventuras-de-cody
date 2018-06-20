@@ -7,12 +7,12 @@ Cody, o personagem, deve coletar as moedas espalhadas pelo cenário e evitar as 
 ## Movimentação
 
 A movimentação se dá por comandos digitados em um campo de texto:
-* cody-andar-esquerda;
-* cody-andar-direita;
-* cody-pular;
-* cody-pular-direita;
-* cody-pular-esquerda; e
-* cody-parar.
+* cody.andar(esquerda);
+* cody.andar(direita);
+* cody.pular();
+* cody.pular(direita);
+* cody.pular(esquerda);
+* cody.parar();
 
 ## Feito com
 * Phaser
