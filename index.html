@@ -4,8 +4,15 @@
         <meta charset = "utf-8" />
         <meta name = "viewport" content = "width = device-width, initial-scale = 1,
         maximum-scale = 1, user-scalable = no" />
-        <title>Joguito</title>
+        <title>Compiland</title>
         <script type = "text/javascript" src = "js/phaser-min.js"></script>
+        
+        <!-- Gramática oficial, a outra é só um tapa-buraco -->
+        <!-- <script type = "text/javascript" src = "js/gramatica.js"></script> -->
+
+        <script type = "text/javascript" src = "traco.js"></script>
+        
+
         <style>
             body{
                 padding: 0px;
@@ -17,16 +24,29 @@
 
     <body>
         <!-- inclui o principal arquivo de jogo -->
-        <script src = "js/main.js"></script>
+        
+        <script type = "text/javascript" src = "js/main.js"></script>
 
         <input type="text" id="comandos" placeholder="Digite um comando">
 
         <button onclick="compilar()">Realizar ação</button>
-
+        
         <script>
+            //Pega o contéudo do input e mando pro interpretador
+            //O interpretador análise e devolve se estiver tudo bem
+            //Manda para o phaser que executa o comando
+            //Sucesso 
             function compilar() {
-                var x = document.getElementById("comandos").value;
-                // aqui é a parte que pega o valor de X e passa para o jison
+                var entrada = document.getElementById("comandos").value;
+                try{
+                    var resultado = traco.parse(entrada);
+                    var parametros = resultado.sentenca.params;
+                   
+                    comandos(parametros);
+                }
+                catch (e){
+                    console.log(String(e));
+                }
             }
         </script>
 

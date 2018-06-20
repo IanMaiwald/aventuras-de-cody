@@ -24,8 +24,17 @@ var cursors;
 var score = 0;
 var gameOver = false;
 var scoreText;
+var direcao;
+var acao;
 
 var game = new Phaser.Game(config);
+
+function comandos(parametros){ // recebe valores do index para determinar a ação e direção do boneco
+    if(parametros.length == 2){
+        direcao = parametros[1];
+    }
+    acao = parametros[0];
+}
 
 function preload ()
 {
@@ -101,7 +110,7 @@ function create ()
     bombs = this.physics.add.group();
 
     //  The score
-    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    scoreText = this.add.text(16, 16, 'Moedas: 0', { fontSize: '32px', fill: '#000' });
 
     //  Collide the player and the stars with the platforms
     this.physics.add.collider(player, platforms);
@@ -121,28 +130,30 @@ function update ()
         return;
     }
 
-    if (cursors.left.isDown)
+    if (direcao == 'esquerda' /*|| cursors.left.isDown*/)
     {
-        player.setVelocityX(-160);
+        player.setVelocityX(-120);
 
         player.anims.play('left', true);
+
     }
-    else if (cursors.right.isDown)
+    else if (direcao == 'direita' /*|| cursors.right.isDown*/)
     {
-        player.setVelocityX(160);
+        player.setVelocityX(120);
 
         player.anims.play('right', true);
     }
-    else
+    else if (acao == 'parar')
     {
         player.setVelocityX(0);
 
         player.anims.play('turn');
     }
 
-    if (cursors.up.isDown && player.body.touching.down)
+    if (acao == 'pular' /*|| cursors.up.isDown*/ && player.body.touching.down)
     {
-        player.setVelocityY(-330);
+        player.setVelocityY(-360);
+        acao = '';
     }
 }
 
@@ -151,8 +162,8 @@ function collectStar (player, star)
     star.disableBody(true, true);
 
     //  Add and update the score
-    score += 10;
-    scoreText.setText('Score: ' + score);
+    score += 1;
+    scoreText.setText('Moedas: ' + score);
 
     if (stars.countActive(true) === 0)
     {
@@ -168,7 +179,7 @@ function collectStar (player, star)
         var bomb = bombs.create(x, 16, 'bomb');
         bomb.setBounce(1);
         bomb.setCollideWorldBounds(true);
-        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+        bomb.setVelocity(Phaser.Math.Between(-100, 100), 10);
         bomb.allowGravity = false;
 
     }

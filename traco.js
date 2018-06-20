@@ -71,7 +71,7 @@
     recoverable: (boolean: TRUE when the parser has a error recovery rule available for this particular error)
   }
 */
-var gramatica = (function(){
+var traco = (function(){
 var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[14,15];
 var parser = {trace: function trace() { },
 yy: {},
@@ -617,7 +617,7 @@ case 8:return 'INVALID'
 break;
 }
 },
-rules: [/^(?:\s+)/,/^(?:cody\b)/,/^(?:andar\b)/,/^(?:pular\b)/,/^(?:parar\b)/,/^(?:esquerda\b)/,/^(?:direita\b)/,/^(?:$)/,/^(?:.)/],
+rules: [/^(?:-)/,/^(?:cody\b)/,/^(?:andar\b)/,/^(?:pular\b)/,/^(?:parar\b)/,/^(?:esquerda\b)/,/^(?:direita\b)/,/^(?:$)/,/^(?:.)/],
 conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8],"inclusive":true}}
 });
 return lexer;
@@ -632,9 +632,9 @@ return new Parser;
 
 
 if (typeof require !== 'undefined' && typeof exports !== 'undefined') {
-exports.parser = gramatica;
-exports.Parser = gramatica.Parser;
-exports.parse = function () { return gramatica.parse.apply(gramatica, arguments); };
+exports.parser = traco;
+exports.Parser = traco.Parser;
+exports.parse = function () { return traco.parse.apply(traco, arguments); };
 exports.main = function commonjsMain(args) {
     if (!args[1]) {
         console.log('Usage: '+args[0]+' FILE');

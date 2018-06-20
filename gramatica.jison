@@ -4,7 +4,7 @@
 %lex
 %%
 
-\s+                   /* skip whitespace */
+"-"                   /* skip whitespace */
 "cody"                return 'CODY'
 "andar"               return 'ANDAR'
 "pular"               return 'PULAR'
