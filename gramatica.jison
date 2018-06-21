@@ -1,18 +1,22 @@
-/* description: Interpreta e executa comandos no Compiland. */
+/* description: Interpreta e executa comandos nas Aventuras de Cody. */
 
 /* lexical grammar */
 %lex
 %%
 
 "-"                   /* skip whitespace */
-"cody"                return 'CODY'
-"andar"               return 'ANDAR'
-"pular"               return 'PULAR'
-"parar"               return 'PARAR'
-"esquerda"            return 'ESQUERDA'
-"direita"             return 'DIREITA'
-<<EOF>>               return 'EOF'
-.                     return 'INVALID'
+"cody"                	return 'CODY'
+"andar"               	return 'ANDAR'
+"pular"               	return 'PULAR'
+"parar"               	return 'PARAR'
+"esquerda"            	return 'ESQUERDA'
+"direita"             	return 'DIREITA'
+"."			return '.'
+";"			return ';'
+"("			return '('
+")"			return ')'
+<<EOF>>               	return 'EOF'
+.                     	return 'INVALID'
 
 /lex
 
@@ -22,7 +26,7 @@
 %% /* language grammar */
 
 programa
-    : comando+ EOF
+    : (comando ';')+ EOF
         %{
             $$ = {
                 nodeType: 'PROGRAMA', 
@@ -31,56 +35,53 @@ programa
             return $$;  
         %}
     ;
-
-cody
-    : CODY
-	;
-	
-pular
-    : PULAR
-	;
-	
-andar
-	: ANDAR
-	;
 	
 acao
-	: pular
-	| andar
-	;
+    : pular
+    | andar
+    ;
 	
 direcao
     : ESQUERDA
     | DIREITA
     ;
 
-parar
-	: PARAR
-	;
-
 comando
-    : cody acao direcao
+    : CODY '.' funcao
+    ;
+
+funcao
+    : ANDAR '('direcao')'
+       {
+		$$ = {
+			nodeType: 'FUNCAO', 
+			name: 'acao_direcao', 
+			params: [$1,$3] 
+		};
+	}
+    | PULAR '(' direcao')'
+        {
+		$$ = {
+			nodeType: 'FUNCAO', 
+			name: 'acao_direcao', 
+			params: [$1,$3] 
+		};
+	}
+    | PULAR '(' ')'
+        {
+		$$ = {
+			nodeType: 'FUNCAO', 
+			name: 'acao_direcao', 
+			params: [$1] 
+		};
+	}
+    | PARAR '(' ')'
 	{
 		$$ = {
-			nodeType: 'COMANDO', 
+			nodeType: 'FUNCAO', 
 			name: 'acao_direcao', 
-			params: [$2,$3] 
+			params: [$1] 
 		};
 	}
-    | cody pular
-        {
-		$$ = {
-			nodeType: 'COMANDO', 
-			name: 'acao_pular', 
-			params: [$2] 
-		};
-	}
-    | cody parar
-        {
-		$$ = {
-			nodeType: 'COMANDO', 
-			name: 'acao_parar', 
-			params: [$2] 
-		};
-	}
+    
 	;
