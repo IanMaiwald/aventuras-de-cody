@@ -15,8 +15,8 @@ A movimentação se dá por comandos digitados em um campo de texto:
 * cody.parar();
 
 ## Feito com
-* Phaser
-* Jison
+* [Phaser](https://github.com/photonstorm/phaser)
+* [Jison](https://github.com/zaach/jison)
 
 ### Autores
 * [Ian Macedo](https://github.com/IanMaiwald)
