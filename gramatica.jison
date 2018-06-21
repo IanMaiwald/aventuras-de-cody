@@ -1,4 +1,4 @@
-/* description: Interpreta e executa comandos nas Aventuras de Cody. */
+/* description: Interpreta e executa comandos n as Aventuras de Cody. */
 
 /* lexical grammar */
 %lex
