@@ -72,12 +72,12 @@
   }
 */
 var gramatica = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[14,15];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,15],$V1=[1,16];
 var parser = {trace: function trace() { },
 yy: {},
-symbols_: {"error":2,"programa":3,"comando":4,"EOF":5,"cody":6,"CODY":7,"pular":8,"PULAR":9,"andar":10,"ANDAR":11,"acao":12,"direcao":13,"ESQUERDA":14,"DIREITA":15,"parar":16,"PARAR":17,"$accept":0,"$end":1},
-terminals_: {2:"error",5:"EOF",7:"CODY",9:"PULAR",11:"ANDAR",14:"ESQUERDA",15:"DIREITA",17:"PARAR"},
-productions_: [0,[3,2],[6,1],[8,1],[10,1],[12,1],[12,1],[13,1],[13,1],[16,1],[4,3],[4,2],[4,2]],
+symbols_: {"error":2,"programa":3,"comando":4,";":5,"EOF":6,"acao":7,"pular":8,"andar":9,"direcao":10,"ESQUERDA":11,"DIREITA":12,"CODY":13,".":14,"funcao":15,"ANDAR":16,"(":17,")":18,"PULAR":19,"PARAR":20,"$accept":0,"$end":1},
+terminals_: {2:"error",5:";",6:"EOF",8:"pular",9:"andar",11:"ESQUERDA",12:"DIREITA",13:"CODY",14:".",16:"ANDAR",17:"(",18:")",19:"PULAR",20:"PARAR"},
+productions_: [0,[3,3],[7,1],[7,1],[10,1],[10,1],[4,3],[15,4],[15,4],[15,3],[15,3]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -87,42 +87,42 @@ case 1:
 
             this.$ = {
                 nodeType: 'PROGRAMA', 
-                sentenca: $$[$0-1]
+                sentenca: $$[$0-2]
             };
             return this.$;  
         
 break;
-case 10:
+case 6:
 
 		this.$ = {
 			nodeType: 'COMANDO', 
 			name: 'acao_direcao', 
-			params: [$$[$0-1],$$[$0]] 
-		};
+			params: $$[$0]
+		}
 	
 break;
-case 11:
+case 7: case 8:
 
 		this.$ = {
-			nodeType: 'COMANDO', 
-			name: 'acao_pular', 
-			params: [$$[$0]] 
-		};
+			nodeType: 'FUNCAO', 
+			name: 'acao_direcao', 
+			params: [$$[$0-3],$$[$0-1]]
+		}
 	
 break;
-case 12:
+case 9: case 10:
 
 		this.$ = {
-			nodeType: 'COMANDO', 
-			name: 'acao_parar', 
-			params: [$$[$0]] 
-		};
+			nodeType: 'FUNCAO', 
+			name: 'acao', 
+			params: [$$[$0-2]]
+		}
 	
 break;
 }
 },
-table: [{3:1,4:2,6:3,7:[1,4]},{1:[3]},{5:[1,5]},{8:7,9:[1,10],10:9,11:[1,12],12:6,16:8,17:[1,11]},o([9,11,17],[2,2]),{1:[2,1]},{13:13,14:[1,14],15:[1,15]},o($V0,[2,5],{5:[2,11]}),{5:[2,12]},o($V0,[2,6]),o([5,14,15],[2,3]),{5:[2,9]},o($V0,[2,4]),{5:[2,10]},{5:[2,7]},{5:[2,8]}],
-defaultActions: {5:[2,1],8:[2,12],11:[2,9],13:[2,10],14:[2,7],15:[2,8]},
+table: [{3:1,4:2,13:[1,3]},{1:[3]},{5:[1,4]},{14:[1,5]},{6:[1,6]},{15:7,16:[1,8],19:[1,9],20:[1,10]},{1:[2,1]},{5:[2,6]},{17:[1,11]},{17:[1,12]},{17:[1,13]},{10:14,11:$V0,12:$V1},{10:17,11:$V0,12:$V1,18:[1,18]},{18:[1,19]},{18:[1,20]},{18:[2,4]},{18:[2,5]},{18:[1,21]},{5:[2,9]},{5:[2,10]},{5:[2,7]},{5:[2,8]}],
+defaultActions: {6:[2,1],7:[2,6],15:[2,4],16:[2,5],18:[2,9],19:[2,10],20:[2,7],21:[2,8]},
 parseError: function parseError(str, hash) {
     if (hash.recoverable) {
         this.trace(str);
@@ -599,26 +599,34 @@ var YYSTATE=YY_START;
 switch($avoiding_name_collisions) {
 case 0:/* skip whitespace */
 break;
-case 1:return 7
+case 1:return 13
 break;
-case 2:return 11
+case 2:return 16
 break;
-case 3:return 9
+case 3:return 19
 break;
-case 4:return 17
+case 4:return 20
 break;
-case 5:return 14
+case 5:return 11
 break;
-case 6:return 15
+case 6:return 12
 break;
-case 7:return 5
+case 7:return 14
 break;
-case 8:return 'INVALID'
+case 8:return 5
+break;
+case 9:return 17
+break;
+case 10:return 18
+break;
+case 11:return 6
+break;
+case 12:return 'INVALID'
 break;
 }
 },
-rules: [/^(?:\s+)/,/^(?:cody\b)/,/^(?:andar\b)/,/^(?:pular\b)/,/^(?:parar\b)/,/^(?:esquerda\b)/,/^(?:direita\b)/,/^(?:$)/,/^(?:.)/],
-conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8],"inclusive":true}}
+rules: [/^(?:-)/,/^(?:cody\b)/,/^(?:andar\b)/,/^(?:pular\b)/,/^(?:parar\b)/,/^(?:esquerda\b)/,/^(?:direita\b)/,/^(?:\.)/,/^(?:;)/,/^(?:\()/,/^(?:\))/,/^(?:$)/,/^(?:.)/],
+conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12],"inclusive":true}}
 });
 return lexer;
 })();

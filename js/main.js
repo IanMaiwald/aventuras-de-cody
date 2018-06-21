@@ -143,11 +143,14 @@ function update ()
 
         player.anims.play('right', true);
     }
-    else if (acao == 'parar')
+    
+    if (acao == 'parar')
     {
         player.setVelocityX(0);
 
         player.anims.play('turn');
+
+        direcao = '';
     }
 
     if (acao == 'pular' /*|| cursors.up.isDown*/ && player.body.touching.down)

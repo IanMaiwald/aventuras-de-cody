@@ -7,11 +7,7 @@
         maximum-scale = 1, user-scalable = no" />
   <title>As aventuras de Cody</title>
   <script type="text/javascript" src="js/phaser-min.js"></script>
-
-  <!-- Gramática oficial, "traco.js" é provisório -->
-  <!-- <script type = "text/javascript" src = "js/gramatica.js"></script> -->
-
-  <script type="text/javascript" src="traco.js"></script>
+  <script type="text/javascript" src="js/gramatica.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
 
@@ -26,12 +22,9 @@
 
 <body>
   <!-- inclui o principal arquivo de jogo -->
-
   <script type="text/javascript" src="js/main.js"></script>
 
   <input type="text" id="comandos" placeholder="Digite um comando">
-  <!-- por algum motivo não digita os espaços -->
-
   <button onclick="compilar()">Realizar ação</button>
 
   <script>
@@ -41,17 +34,18 @@
         compilar()
       }
     });
-    //Pega o contéudo do input e mando pro interpretador
-    //O interpretador análise e devolve se estiver tudo bem
-    //Manda para o phaser que executa o comando
-    //Sucesso 
+    // Pega o contéudo do input e mando pro interpretador, 
+    // O interpretador analisa e devolve se estiver tudo bem,
+    // Manda para o phaser, que executa o comando,
+    // Sucesso.
     function compilar() {
-      var entrada = document.getElementById("comandos").value;
+      var entrada = document.getElementById("comandos").value; // Pega o texto do input.
       try {
-        var resultado = traco.parse(entrada);
-        var parametros = resultado.sentenca.params;
-
-        comandos(parametros);
+        var resultado = gramatica.parse(entrada); // Manda o texto para o interpretador, que retorna um array com a ação e a direção, caso tenha alguma.
+        var parametros = resultado.sentenca.params.params; // "resultado" é um objeto retornado pelo interpretador, resultado.sentenca.params.params é um array que possui a ação e direção.
+        //console.log(resultado);
+        //console.log(parametros);
+        comandos(parametros); // comandos() é uma função no main.js (arquivo do jogo), ela altera o valor de umas variáveis globais lá para poder controlar o jogo.
       }
       catch (e) {
         console.log(String(e));
