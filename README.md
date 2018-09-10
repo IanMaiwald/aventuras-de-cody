@@ -1,5 +1,5 @@
-# phaser-compiler
-https://ianmaiwald.github.io/phaser-compiler/
+# aventuras-de-cody
+https://ianmaiwald.github.io/aventuras-de-cody/
 
 Jogo feito com Phaser que responde a comandos digitados em um campo de texto para movimentar o personagem.
 Cody, o personagem, deve coletar as moedas espalhadas pelo cenário e evitar as bombas.
